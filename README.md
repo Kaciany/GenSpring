@@ -1,2 +1,0 @@
-# GenSpring
- Exercícios de spring
