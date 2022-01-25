@@ -1,35 +1,50 @@
 package br.org.generation.blogpessoal.model;
-
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity //vai gerar tabela
-@Table(name="tb_postagens") //nome da tabela (esse comando tem a mesma função do mysql create table tb_postagens
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
+@Table(name="tb_postagens") // create table tb_postagens(
 public class Postagem {
 	
-	@Id // prymery key (id)
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // id autoincrement prymery key (id)
-	private Long id; 
+	@Id // primary key (id)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // id auto increment 
+	private Long id;
 	
-	@NotBlank(message = "O atributo título é Obrigatório!!")
-	@Size(min = 5, max = 100, message = "O atributo titulo deve conter no mínimo 05 e o máximo 100 caractere")
-	private String titulo;
+	@NotBlank(message = "O artributo título é obrigatório!")
+	@Size(min = 5, max = 100, message = "O atributo título deve conter no mínimo 5 e no máximo 100 caracteres!")
+	private String titulo;	
 	
-	@NotBlank(message = "O atributo texto é Obrigatório!!")
-	@Size(min = 10, max = 1000, message = "O atributo texto deve conter no mínimo 10 e o máximo 1000 caractere")
+	@NotBlank(message = "O artributo texto é obrigatório!")
+	@Size(min = 10, max = 1000, message = "O atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres!")
 	private String texto;
 	
-	@UpdateTimestamp  // artualiza data e hora
+	@UpdateTimestamp
 	private LocalDateTime data;
 	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
+
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -37,7 +52,7 @@ public class Postagem {
 	public void setId(Long id) {
 		this.id = id;
 	}
-				
+
 	public String getTitulo() {
 		return titulo;
 	}
@@ -62,8 +77,4 @@ public class Postagem {
 		this.data = data;
 	}
 
-	
-	
- 
- 
 }
