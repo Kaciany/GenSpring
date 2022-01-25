@@ -41,15 +41,7 @@ public class PostagemController {
 				.map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	/*Usando IF
-	    public ResponseEntity <Optional<Postagem>> getById(@PathVariable Long id)
-		Optional <Postagem> resposta = postagemRepository.findById(id);
-		
-		if(resposta.isPresent())
-			ResponseEntity.ok(resposta);
-		else
-			ResponseEntity.notFound().build();	
-	 */
+	
 		
 	@GetMapping("/titulo/{titulo}")
 	public ResponseEntity <List<Postagem>> getByTitulo(@PathVariable String titulo){
