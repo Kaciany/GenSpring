@@ -49,6 +49,7 @@ public class PostagemController {
 	
  	}
 	
+	
 	@PostMapping
 	public ResponseEntity <Postagem> postPostagem(@Valid @RequestBody Postagem postagem){
 		return ResponseEntity.status(HttpStatus.CREATED).body(postagemRepository.save(postagem));
