@@ -1,20 +1,17 @@
-package br.org.generation.blogpessoal.model;
-
-import java.util.List;
-
-import javax.persistence.CascadeType;
+package br.org.generation.lojagames.model;
+import java.time.LocalDate;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_usuarios")
@@ -31,16 +28,17 @@ public class Usuario {
 	@Email(message = "O atributo Usuário deve ser um email válido!")
 	private String usuario;
 
-	
 	@NotBlank(message = "O atributo Senha é Obrigatório!")
 	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
 	private String senha;
 
 	private String foto;
 
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("usuario")
-	private List<Postagem> postagem;
+	@Column(name = "data_nascimento")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "O atributo Data de Nascimento é Obrigatório!")
+	private LocalDate dataNascimento;
+	
 
 	public Long getId() {
 		return id;
@@ -82,12 +80,12 @@ public class Usuario {
 		this.foto = foto;
 	}
 
-	public List<Postagem> getPostagem() {
-		return postagem;
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setPostagem(List<Postagem> postagem) {
-		this.postagem = postagem;
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 }

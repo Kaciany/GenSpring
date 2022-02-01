@@ -1,4 +1,4 @@
-package br.org.generation.blogpessoal.controller;
+package br.org.generation.lojagames.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.org.generation.blogpessoal.model.Usuario;
-import br.org.generation.blogpessoal.model.UsuarioLogin;
-import br.org.generation.blogpessoal.repository.UsuarioRepository;
-import br.org.generation.blogpessoal.service.UsuarioService;
+
+import br.org.generation.lojagames.model.Usuario;
+import br.org.generation.lojagames.model.UsuarioLogin;
+import br.org.generation.lojagames.respository.UsuarioRepository;
+import br.org.generation.lojagames.service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
 
-	
 	@Autowired
 	private UsuarioService usuarioService;
 
@@ -66,7 +66,5 @@ public class UsuarioController {
 		return usuarioService.autenticarUsuario(user).map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
-
-
 
 }
