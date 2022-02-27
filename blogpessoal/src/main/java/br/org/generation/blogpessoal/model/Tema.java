@@ -14,25 +14,32 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name="tb_temas") 
+@Table(name = "tb_temas")
 public class Tema {
-	
-	@Id // primary key (id)
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // id auto increment 
-	private Long id;
-	
-	@NotBlank(message = "O atributo Descrição é obrigatório e não pode conter espaços em branco.")
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
+	@NotBlank(message = "O atributo Descrição é obrigatório e não pode conter espaços em branco")
 	private String descricao;
-	
+
 	@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("tema")
 	private List<Postagem> postagem;
 
-	public Long getId() {
+	public Tema(Long id, String descricao) {
+		this.id = id;
+		this.descricao = descricao;
+	}
+	
+	public Tema() { }
+	
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -51,7 +58,5 @@ public class Tema {
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
-	
-	
 
 }

@@ -19,25 +19,25 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
-@Table(name="tb_usuarios")
+@Table(name = "tb_usuarios")
 public class Usuario {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotNull(message = "O atributo Nome é obrigatório!")
+
+	@NotNull(message = "O atributo Nome é Obrigatório!")
 	private String nome;
-	
-	@Schema(example="email@email.com.br")
-	@NotNull(message = "O atributo Usuário é obrigatório!")
-	@Email(message = "O atributo Usuaário deve ser um email válido!")
+
+	@Schema(example = "email@email.com.br")
+	@NotNull(message = "O atributo Usuário é Obrigatório!")
+	@Email(message = "O atributo Usuário deve ser um email válido!")
 	private String usuario;
-	
-	@NotBlank(message="O atributo Senha é obrigatório!")
+
+	@NotBlank(message = "O atributo Senha é Obrigatório!")
 	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
 	private String senha;
-	
+
 	private String foto;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
@@ -45,18 +45,15 @@ public class Usuario {
 	private List<Postagem> postagem;
 	
 	
-	//Método Construtor com atributos
-	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+	public Usuario(Long id, String nome, String usuario, String senha) {
 		this.id = id;
 		this.nome = nome;
 		this.usuario = usuario;
 		this.senha = senha;
-		this.foto = foto;
 	}
 	
-	//Método Construtor vazio
-	public Usuario() {}
-
+	public Usuario() { }
+	
 	public Long getId() {
 		return id;
 	}
@@ -104,6 +101,5 @@ public class Usuario {
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
-	
 
 }
